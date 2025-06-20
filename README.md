@@ -26,5 +26,26 @@ Awesome app... 505 lines of code! While Adelia is quite secure, Adelia1 has slig
 472 lines. May or may not be better than adelia1, depending on how server is set up. Personally, i like adelia1 better. White‑space handling	Any run of two or more newlines is collapsed to one newline, so a pasted wall of blank lines now renders with the minimum possible vertical gap (one br>). Security / prod hardening	• expose_php disabled
 • session cookie made Secure automatically when the site is served over HTTPS, kept Strict/HttpOnly otherwise
 • extra defence‑in‑depth headers (Referrer‑Policy, Permissions‑Policy, X‑Permitted‑Cross‑Domain‑Policies)
+
+Whitespace tightening – normalizeWhitespace() now uses '/\n{2,}/' instead of '/\n{3,}/', so there is never a blank line, only a single <br>.
+
+Headers & php.ini flags – added ini_set('expose_php','0') and three security headers; session cookie is marked Secure automatically when HTTPS is detected.
+
+No functional logic altered – DB schema, routing, uploads, CSRF, rendering all behave exactly as before, just with tidier output and stronger defaults for production deployment.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  
 # Note- since php is not that great, i am not going to make any more imageboards besides the "adelia" series. I will work on them every so often. Mostly, i will be working with Rust -, because php is just silly. 
