@@ -23,8 +23,7 @@ Awesome app... 505 lines of code! While Adelia is quite secure, Adelia1 has slig
 
 # adelia2-
 
-White‑space handling	Any run of two or more newlines is collapsed to one newline, so a pasted wall of blank lines now renders with the minimum possible vertical gap (one <br>).
- Security / prod hardening	• expose_php disabled
+White‑space handling	Any run of two or more newlines is collapsed to one newline, so a pasted wall of blank lines now renders with the minimum possible vertical gap (one br>). Security / prod hardening	• expose_php disabled
 • session cookie made Secure automatically when the site is served over HTTPS, kept Strict/HttpOnly otherwise
 • extra defence‑in‑depth headers (Referrer‑Policy, Permissions‑Policy, X‑Permitted‑Cross‑Domain‑Policies)
  
