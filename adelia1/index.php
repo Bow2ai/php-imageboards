@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 /*──────────────────────────────────────────────────────────*/
-/*   TinyBoard v0.9 – single‑file image board (2025‑06‑20)  */
+/*   Adelia1– single‑file image board (2025‑06‑20)  */
 /*   Hardened edition (extra security headers, size caps,   */
 /*   open‑redirect guard, double MIME sniff)                */
 /*   Requires PHP ≥ 8.4.0                                    */
