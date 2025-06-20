@@ -1,4 +1,4 @@
-# TinyBoard v0.9 — Single‑file Image‑board Engine
+# Adelia— Single‑file Image‑board Engine
 
 *PHP 8.4 • Last updated 20 June 2025*
 
@@ -21,7 +21,7 @@
 
 ## 1 · Introduction <a id="1-introduction"></a>
 
-**TinyBoard** is a deliberately minimal image‑board platform consisting of:
+**Adelia** is a deliberately minimal image‑board platform consisting of:
 
 | Component                | Lines ≈ | Purpose                                    |
 | ------------------------ | ------- | ------------------------------------------ |
