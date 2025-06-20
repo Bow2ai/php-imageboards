@@ -21,4 +21,4 @@ What if you took vichan, made it one 435 line page of php code, sqlite3, securit
 
 Awesome app... 505 lines of code! While Adelia is quite secure, Adelia1 has slightly improved security hardening. Hey, its php- there is ALWAYS room to make it more secure. In either the server settings or the php code itself, there is ALWAYS room to make php apps more secure. THAT is why php is rapidly going out of style. Want real security? Use a RUST coded imageboard. IF you want to use php, use a VERY small codebase like adelia or adelia1 , have ai audit the code every so often, and never use php for anything serious.  
  
-# Note- since php is not that great, i am not going to make any more imageboards besides the "adelia" series. I will work on them every so often. Mostly, i will be working on Rust Imageboars, so php is just silly. 
+# Note- since php is not that great, i am not going to make any more imageboards besides the "adelia" series. I will work on them every so often. Mostly, i will be working with Rust -, so php is just silly. 
