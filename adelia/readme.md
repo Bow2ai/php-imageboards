@@ -1,3 +1,15 @@
+
+
+
+![vichan](https://github.com/user-attachments/assets/a2c2e318-1999-47d6-9051-88b0f089ea62)
+
+
+
+
+
+
+
+
 # Adelia— Single‑file Image‑board Engine
 
 *PHP 8.4 • Last updated 20 June 2025*
