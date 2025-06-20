@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>TinyBoard v0.9 – Complete Manual (PHP 8.4, June 2025)</title>
+<title>Adelia v0.9 – Complete Manual (PHP 8.4, June 2025)</title>
 
 <!--— Minimal inline styles for pleasant reading —-->
 <style>
@@ -40,7 +40,7 @@
 <body>
 <main>
 
-<h1>TinyBoard v0.9 &ndash; Single‑file Image Board for PHP 8.4</h1>
+<h1>Adelia v0.9 &ndash; Single‑file Image Board for PHP 8.4</h1>
 <p><em>Last updated:</em> 20 June 2025</p>
 
 <nav class="toc">
@@ -57,7 +57,7 @@
     <li><a href="#frontend">Front‑end&nbsp;JS&nbsp;Helpers</a></li>
     <li><a href="#theme">Theming&nbsp;&amp;&nbsp;CSS</a></li>
     <li><a href="#maintenance">Maintenance&nbsp;Tasks</a></li>
-    <li><a href="#extending">Extending&nbsp;TinyBoard</a></li>
+    <li><a href="#extending">Extending&nbsp;Adelia</a></li>
     <li><a href="#faq">FAQ</a></li>
     <li><a href="#license">License</a></li>
   </ol>
@@ -65,13 +65,13 @@
 
 <section id="intro">
   <h2>1&nbsp;· Introduction</h2>
-  <p><strong>TinyBoard</strong> is a deliberately minimal image‑board engine consisting of:</p>
+  <p><strong>Adelia</strong> is a deliberately minimal image‑board engine consisting of:</p>
   <ul>
     <li>one ~600 line <code>index.php</code> (routes, DB layer, HTML renderer)</li>
     <li>three vanilla&nbsp;JS helpers (<code>hide-form.js</code>, <code>inline-expanding.js</code>, <code>style.js</code>)</li>
     <li>static CSS themes (ported from <em>vichan</em> / 8chan)</li>
   </ul>
-  <p>Despite its size, TinyBoard provides pagination, CSRF protection, basic
+  <p>Despite its size, Adelia provides pagination, CSRF protection, basic
      anti‑spam, content‑type‑safe uploads, WAL‑optimised SQLite, and per‑IP flood
      control. It targets PHP 8.4.0+ and uses PHP 8.4 language features throughout.</p>
 </section>
@@ -80,8 +80,8 @@
   <h2>2&nbsp;· Quick Start</h2>
   <ol>
     <li>Clone or download the repository:
-      <pre><code>git clone https://example.com/tinyboard.git
-cd tinyboard</code></pre></li>
+      <pre><code>git clone https://example.com/Adelia.git
+cd Adelia</code></pre></li>
     <li>Ensure PHP 8.4+ is available:
       <pre><code>$ php -v
 PHP 8.4.8 (cli) (built: Jun  9 2025)</code></pre></li>
@@ -255,7 +255,7 @@ CREATE INDEX idx_created         ON posts(created_at DESC);</code></pre>
 </section>
 
 <section id="extending">
-  <h2>12&nbsp;· Extending TinyBoard</h2>
+  <h2>12&nbsp;· Extending Adelia</h2>
   <p>Ideas in rough order of complexity:</p>
   <ol>
     <li>Tripcodes (<code>name#secret</code>)</li>
@@ -278,7 +278,7 @@ CREATE INDEX idx_created         ON posts(created_at DESC);</code></pre>
         early in <code>handleUpload()</code> or hide the file field via CSS.</dd>
 
     <dt><strong>Q:</strong> Where is the user login system?</dt>
-    <dd>Intentional omission. TinyBoard is designed for anonymous or pseudonymous
+    <dd>Intentional omission. Adelia is designed for anonymous or pseudonymous
         posting. If you need accounts, hook into PHP sessions and store users in a
         new table; all CSRF infrastructure is already in place.</dd>
   </dl>
@@ -286,7 +286,7 @@ CREATE INDEX idx_created         ON posts(created_at DESC);</code></pre>
 
 <section id="license">
   <h2>14&nbsp;· License &amp; Credits</h2>
-  <p>TinyBoard is released under the <strong>MIT License</strong>.  
+  <p>Adelia is released under the <strong>MIT License</strong>.  
      Original theme CSS adapted from <em>vichan</em> (Apache‑2.0).  
      Thumbnail code borrows ideas from <em>Danbooru</em> (MIT).</p>
 </section>
