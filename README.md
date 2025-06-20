@@ -1,5 +1,4 @@
-# PHP is a mind virus, a vortex of stupidity. IF you are going to use php, do NOT use it for anything serious, and keep the code SMALL as possible and ONLY use the very latest version of php. I will not work much on this repo, every so often i will. This repo will show very small codebase apps designed for security- and designed to show how absurd most bloated and unsafe apps are. 
-
+# PSA- PHP is a mind virus, a vortex of stupidity. IF you are going to use php, do NOT use it for anything serious, and keep the code SMALL as possible and ONLY use the very latest version of php.
 
 
 # board list
