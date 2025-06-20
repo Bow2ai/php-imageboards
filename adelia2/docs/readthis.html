@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Adelia v0.9 – Complete Manual (PHP 8.4, June 2025)</title>
+
+<!--— Minimal inline styles for pleasant reading —-->
+<style>
+  :root{
+    --bg:#fafafa;--fg:#222;--accent:#007acc;--code:#f5f5f5;
+    --table-h:#e2e8f0;--kbd:#eee;--kbd-bd:#bbb;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#181a1b;--fg:#ddd;--accent:#66afe9;--code:#222;
+      --table-h:#2a2d2f;--kbd:#333;--kbd-bd:#666;
+    }
+  }
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);font:17px/1.55 system-ui,-apple-system,
+            BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif;}
+  main{max-width:900px;margin:auto;padding:2.2rem 1.2rem;}
+  h1,h2,h3,h4{color:var(--accent);line-height:1.3;margin-top:2.2rem}
+  h1{font-size:2.2rem;margin-top:0}
+  h2{font-size:1.6rem}
+  h3{font-size:1.25rem}
+  pre,code{kbd,tt}{font-family:SFMono-Regular,Consolas,"Liberation Mono",Menlo,monospace}
+  pre{background:var(--code);padding:1rem;overflow:auto;border-radius:6px}
+  code,kbd{background:var(--code);border-radius:4px;padding:.15rem .35rem}
+  kbd{border:1px solid var(--kbd-bd);box-shadow:inset 0 -1px 0 var(--kbd-bd);font-size:.9em}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  table{border-collapse:collapse;margin:1rem 0;width:100%}
+  th,td{padding:.4rem .6rem;border:1px solid var(--table-h)}
+  th{background:var(--table-h)}
+  nav.toc ol{margin-left:1rem;list-style:square}
+  nav.toc a{font-weight:500}
+  details summary{cursor:pointer;margin:.6rem 0;font-weight:600}
+</style>
+</head>
+<body>
+<main>
+
+<h1>Adelia v0.9 &ndash; Single‑file Image Board for PHP 8.4</h1>
+<p><em>Last updated:</em> 20 June 2025</p>
+
+<nav class="toc">
+  <h2>Table&nbsp;of&nbsp;Contents</h2>
+  <ol>
+    <li><a href="#intro">Introduction</a></li>
+    <li><a href="#quickstart">Quick&nbsp;Start</a></li>
+    <li><a href="#files">File&nbsp;Layout</a></li>
+    <li><a href="#constants">Configuration&nbsp;Constants</a></li>
+    <li><a href="#features">Feature&nbsp;Overview</a></li>
+    <li><a href="#security">Security&nbsp;Model</a></li>
+    <li><a href="#workflow">Posting&nbsp;Workflow</a></li>
+    <li><a href="#database">Database&nbsp;Schema&nbsp;&amp;&nbsp;Indexes</a></li>
+    <li><a href="#frontend">Front‑end&nbsp;JS&nbsp;Helpers</a></li>
+    <li><a href="#theme">Theming&nbsp;&amp;&nbsp;CSS</a></li>
+    <li><a href="#maintenance">Maintenance&nbsp;Tasks</a></li>
+    <li><a href="#extending">Extending&nbsp;Adelia</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#license">License</a></li>
+  </ol>
+</nav>
+
+<section id="intro">
+  <h2>1&nbsp;· Introduction</h2>
+  <p><strong>Adelia</strong> is a deliberately minimal image‑board engine consisting of:</p>
+  <ul>
+    <li>one ~600 line <code>index.php</code> (routes, DB layer, HTML renderer)</li>
+    <li>three vanilla&nbsp;JS helpers (<code>hide-form.js</code>, <code>inline-expanding.js</code>, <code>style.js</code>)</li>
+    <li>static CSS themes (ported from <em>vichan</em> / 8chan)</li>
+  </ul>
+  <p>Despite its size, Adelia provides pagination, CSRF protection, basic
+     anti‑spam, content‑type‑safe uploads, WAL‑optimised SQLite, and per‑IP flood
+     control. It targets PHP 8.4.0+ and uses PHP 8.4 language features throughout.</p>
+</section>
+
+<section id="quickstart">
+  <h2>2&nbsp;· Quick Start</h2>
+  <ol>
+    <li>Clone or download the repository:
+      <pre><code>git clone https://example.com/Adelia.git
+cd Adelia</code></pre></li>
+    <li>Ensure PHP 8.4+ is available:
+      <pre><code>$ php -v
+PHP 8.4.8 (cli) (built: Jun  9 2025)</code></pre></li>
+    <li>Start a local server:
+      <pre><code>php -S 127.0.0.1:8000</code></pre></li>
+    <li>Visit <a href="http://127.0.0.1:8000/">http://127.0.0.1:8000/</a> in your browser.</li>
+    <li>Default moderator password is <kbd>8899</kbd>. To change it, run:<br>
+      <pre><code>php -r "echo password_hash('newPass', PASSWORD_DEFAULT).PHP_EOL;"</code></pre>
+      and paste the resulting hash into <code>MOD_HASH</code>.</li>
+  </ol>
+</section>
+
+<section id="files">
+  <h2>3&nbsp;· File Layout</h2>
+  <table>
+    <thead><tr><th>Path</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td><code>index.php</code></td><td>Main application (routes, HTML, DB).</td></tr>
+      <tr><td><code>uploads/</code></td><td>Original images (auto‑created).</td></tr>
+      <tr><td><code>uploads/thumb/</code></td><td>PNG thumbnails.</td></tr>
+      <tr><td><code>js/hide-form.js</code></td><td>Hide&nbsp;/ show post form.</td></tr>
+      <tr><td><code>js/inline-expanding.js</code></td><td>Click‑to‑expand images.</td></tr>
+      <tr><td><code>js/style.js</code></td><td>Theme switcher.</td></tr>
+      <tr><td><code>stylesheets/*.css</code></td><td>Visual themes.</td></tr>
+      <tr><td><code>board.sqlite</code></td><td>SQLite 3 WAL database (created on first run).</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="constants">
+  <h2>4&nbsp;· Configuration Constants (index.php)</h2>
+  <table>
+    <thead><tr><th>Constant</th><th>Default</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td><code>DB_FILE</code></td><td><code>board.sqlite</code></td><td>SQLite file path.</td></tr>
+      <tr><td><code>DIR_ORIG</code></td><td><code>uploads</code></td><td>Original images.</td></tr>
+      <tr><td><code>DIR_THUMB</code></td><td><code>uploads/thumb</code></td><td>Thumbnails.</td></tr>
+      <tr><td><code>THUMB_W/H</code></td><td><code>255&nbsp;/&nbsp;144</code></td><td>Thumbnail bounds.</td></tr>
+      <tr><td><code>MAX_SIZE</code></td><td>5 MiB</td><td>Upload size limit.</td></tr>
+      <tr><td><code>PAGE_SIZE</code></td><td>15</td><td>Threads or replies per page.</td></tr>
+      <tr><td><code>COOLDOWN</code></td><td>10 s</td><td>Min seconds between posts per IP.</td></tr>
+      <tr><td><code>MOD_HASH</code></td><td>bcrypt hash</td><td>Moderator password.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="features">
+  <h2>5&nbsp;· Feature Overview</h2>
+  <ul>
+    <li><strong>Clean routing:</strong> one entry‑point file; actions selected by POST
+        <code>action</code> parameter.</li>
+    <li><strong>Pagination:</strong> index and threads support <code>?page= n</code>.</li>
+    <li><strong>Uploads:</strong> JPEG, PNG, GIF, WebP verified via <code>finfo</code> MIME sniff.</li>
+    <li><strong>Thumbnails:</strong> GD‑based resampling, EXIF stripped.</li>
+    <li><strong>SQLite WAL:</strong> fast read‑heavy concurrency, plus indexes on
+        <code>(parent,bumped_at)</code>.</li>
+    <li><strong>CSRF tokens:</strong> session‑tied, added to all mutating requests.</li>
+    <li><strong>Per‑IP rate‑limit:</strong> 1 post per <code>COOLDOWN</code> seconds.</li>
+    <li><strong>Hide/show form:</strong> UX helper for uncluttered browsing.</li>
+    <li><strong>Theme switcher:</strong> 6 example stylesheets.</li>
+    <li><strong>Moderator delete:</strong> POST‑only, requires password prompt.</li>
+  </ul>
+</section>
+
+<section id="security">
+  <h2>6&nbsp;· Security Model</h2>
+  <h3>6.1 Upload Pipeline</h3>
+  <ol>
+    <li>Server checks <em>Content‑Type</em> with <code>finfo</code>.</li>
+    <li>Rejects files &gt; <code>MAX_SIZE</code>.</li>
+    <li>Generates collision‑free 12‑hex IDs.</li>
+    <li>Thumbnails limited to 40 MP source images.</li>
+  </ol>
+
+  <h3>6.2 Request Hardening</h3>
+  <ul>
+    <li>All state‑changing actions (<kbd>post</kbd>, <kbd>mod_delete</kbd>) require a
+        CSRF token and use <strong>POST</strong>.</li>
+    <li><code>password_verify()</code> protects moderator actions (single account by default).</li>
+    <li>IP‑based flood control prevents simple DoS spam.</li>
+  </ul>
+
+  <h3>6.3 Future Enhancements</h3>
+  <ul>
+    <li>Add tripcode hashing to <code>name</code> field.</li>
+    <li>Hash original images (SHA‑256) to block duplicates.</li>
+    <li>Use <code>Strict‑Transport‑Security</code> when served via HTTPS.</li>
+  </ul>
+</section>
+
+<section id="workflow">
+  <h2>7&nbsp;· Posting Workflow</h2>
+
+  <details open>
+    <summary><strong>New thread</strong></summary>
+    <ol>
+      <li>User loads index.</li>
+      <li>JavaScript hides the <em>New Topic</em> form until clicked.</li>
+      <li>On submit, PHP: validates name → image (≤5 MiB) → inserts into SQLite → redirect to index.</li>
+    </ol>
+  </details>
+
+  <details>
+    <summary><strong>Reply</strong></summary>
+    <ol>
+      <li>User visits <code>?thread=id</code>.</li>
+      <li>Reply form has hidden <code>parent=id</code>.</li>
+      <li>Rate‑limit check; insert; bump OP’s <code>bumped_at</code>.</li>
+    </ol>
+  </details>
+
+  <details>
+    <summary><strong>Moderator delete</strong></summary>
+    <ol>
+      <li>Click <kbd>[–]</kbd> ⟶ password prompt.</li>
+      <li>Front‑end builds hidden POST form with CSRF token.</li>
+      <li>Server verifies bcrypt hash; removes image thumbnails; marks body as deleted.</li>
+    </ol>
+  </details>
+</section>
+
+<section id="database">
+  <h2>8&nbsp;· Database Schema &amp; Indexes</h2>
+
+<pre><code>CREATE TABLE posts (
+  id         INTEGER PRIMARY KEY AUTOINCREMENT,
+  parent     INTEGER,               -- NULL = thread OP
+  name       TEXT    NOT NULL,
+  subject    TEXT,
+  body       TEXT    NOT NULL,
+  image      TEXT,
+  thumb      TEXT,
+  created_at INTEGER NOT NULL,
+  bumped_at  INTEGER NOT NULL,
+  ip         TEXT    NOT NULL
+);
+
+CREATE INDEX idx_parent          ON posts(parent);
+CREATE INDEX idx_parent_bumped   ON posts(parent, bumped_at DESC);
+CREATE INDEX idx_created         ON posts(created_at DESC);</code></pre>
+</section>
+
+<section id="frontend">
+  <h2>9&nbsp;· Front‑end JavaScript</h2>
+  <h3>9.1 hide‑form.js</h3>
+  <p>Hides the posting form by default and reveals it on click.  
+     It now auto‑detects the form via either <code>name="post"</code> or the hidden
+     <code>action=post</code> input.</p>
+  <h3>9.2 inline‑expanding.js</h3>
+  <p>Replaces thumbnails with full‑size images on click, collapsing when clicked again.</p>
+  <h3>9.3 style.js</h3>
+  <p>Swaps alternate CSS themes by toggling the <code>disabled</code> attribute on stylesheet links.</p>
+</section>
+
+<section id="theme">
+  <h2>10&nbsp;· Theming &amp; CSS</h2>
+  <p>Add a new stylesheet under <code>stylesheets/</code> and a matching
+     <code>&lt;link data-style="yourname"&gt;</code> line in <code>index.php</code>.
+     The theme switcher automatically lists all links with <code>data-style</code>
+     except <code>default</code>.</p>
+</section>
+
+<section id="maintenance">
+  <h2>11&nbsp;· Maintenance Tasks</h2>
+  <ul>
+    <li><strong>Backups:</strong> <pre><code>sqlite3 board.sqlite ".backup nightly-$(date +%F).bak"</code></pre></li>
+    <li><strong>Vacuum:</strong> run monthly:
+      <pre><code>sqlite3 board.sqlite "PRAGMA wal_checkpoint(TRUNCATE); VACUUM;"</code></pre></li>
+    <li><strong>Logrotate:</strong> configure web‑server access/error logs.</li>
+  </ul>
+</section>
+
+<section id="extending">
+  <h2>12&nbsp;· Extending Adelia</h2>
+  <p>Ideas in rough order of complexity:</p>
+  <ol>
+    <li>Tripcodes (<code>name#secret</code>)</li>
+    <li>Country flags via GeoIP</li>
+    <li>JSON API for SPA/mobile clients</li>
+    <li>WebSocket push for live threads</li>
+    <li>Multi‑board support (<code>/chess/</code>, <code>/math/</code>, …)</li>
+  </ol>
+</section>
+
+<section id="faq">
+  <h2>13&nbsp;· FAQ</h2>
+  <dl>
+    <dt><strong>Q:</strong> Why SQLite instead of MySQL/PostgreSQL?</dt>
+    <dd><strong>A:</strong> For a small educational board, WAL‑mode SQLite handles thousands
+        of posts per minute without external dependencies.</dd>
+
+    <dt><strong>Q:</strong> Can I disable image uploads entirely?</dt>
+    <dd>Add <code>if(!empty($_FILES['file']['tmp_name'])) exit('Uploads disabled');</code>
+        early in <code>handleUpload()</code> or hide the file field via CSS.</dd>
+
+    <dt><strong>Q:</strong> Where is the user login system?</dt>
+    <dd>Intentional omission. Adelia is designed for anonymous or pseudonymous
+        posting. If you need accounts, hook into PHP sessions and store users in a
+        new table; all CSRF infrastructure is already in place.</dd>
+  </dl>
+</section>
+
+<section id="license">
+  <h2>14&nbsp;· License &amp; Credits</h2>
+  <p>Adelia is released under the <strong>MIT License</strong>.  
+     Original theme CSS adapted from <em>vichan</em> (Apache‑2.0).  
+     Thumbnail code borrows ideas from <em>Danbooru</em> (MIT).</p>
+</section>
+
+<hr>
+<p style="text-align:center;font-size:.9rem">
+  Built with ❤️ for the <em>chess &amp; learning</em> community ·
+  Page generated 20 Jun 2025
+</p>
+</main>
+</body>
+</html>
