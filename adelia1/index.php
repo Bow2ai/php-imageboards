@@ -2,26 +2,25 @@
 declare(strict_types=1);
 
 /*──────────────────────────────────────────────────────────*/
-/*   Adelia1– single‑file image board (2025‑06‑20)  */
-/*   Hardened edition (extra security headers, size caps,   */
-/*   open‑redirect guard, double MIME sniff)                */
-/*   Requires PHP ≥ 8.4.0                                    */
+/*   TinyBoard v0.9 – single‑file image board (2025‑06‑20)  */
+/*   Hardened edition – configurable debugging/logging      */
+/*   Requires PHP 8.4+ (works even without mbstring)        */
 /*──────────────────────────────────────────────────────────*/
-
-if (PHP_VERSION_ID < 80400) {
-    http_response_code(500);
-    header('Content‑Type: text/plain; charset=utf‑8');
-    exit("PHP 8.4+ required – you are running ".PHP_VERSION."\n");
-}
 
 /*────────────── Configuration ─────────────────────────────*/
 const
+    /*‑‑‑ Debugging & logging switches ‑‑‑*/
+    DEBUG_DISPLAY = false,                      // show errors in browser
+    DEBUG_LOG     = false,                      // write errors to error.txt
+    LOG_FILE      = __DIR__.'/error.txt',
+
+    /*‑‑‑ Board settings ‑‑‑*/
     DB_FILE     = __DIR__.'/board.sqlite',
     DIR_ORIG    = __DIR__.'/uploads',
     DIR_THUMB   = __DIR__.'/uploads/thumb',
     THUMB_W     = 255,
     THUMB_H     = 144,
-    MAX_SIZE    = 5 * 1024 * 1024,   // 5 MiB upload size
+    MAX_SIZE    = 5 * 1024 * 1024,   // 5 MiB per upload
     MAX_BODY    = 10_000,            // max comment length
     MAX_SUBJ    = 100,               // max subject length
     MAX_NAME    = 35,                // max name length
@@ -31,11 +30,42 @@ const
     SESSION_OPTS = ['cookie_httponly'=>true,'cookie_samesite'=>'Strict'],
     MOD_HASH    = '$2b$10$E8N1k0703L7hxQ/H6lkV/u3FFE7u3.HtwgTtkOoSeWlKgN39hd7Qe'; // "8899"
 
-/*────────────── Environment ───────────────────────────────*/
+/*──────── Debug behaviour (use constants above) ───────────*/
+error_reporting(E_ALL);
+ini_set('display_errors',        DEBUG_DISPLAY ? '1' : '0');
+ini_set('display_startup_errors',DEBUG_DISPLAY ? '1' : '0');
+if (DEBUG_LOG) {
+    ini_set('log_errors', '1');
+    ini_set('error_log', LOG_FILE);
+    /* create the log file if absent and set sane permissions */
+    if (!is_file(LOG_FILE)) touch(LOG_FILE);
+    chmod(LOG_FILE, 0644);
+} else {
+    ini_set('log_errors', '0');
+}
+
+/*───── mbstring fallback (ASCII‑only) ─────*/
+if (!function_exists('mb_substr')) {
+    function mb_substr(string $s, int $start, ?int $len = null): string {
+        return $len === null ? substr($s, $start) : substr($s, $start, $len);
+    }
+}
+if (!function_exists('mb_strlen')) {
+    function mb_strlen(string $s): int { return strlen($s); }
+}
+
+/*────────────── Compatibility check ───────*/
+if (PHP_VERSION_ID < 80400) {
+    http_response_code(500);
+    header('Content-Type: text/plain; charset=utf-8');
+    exit("PHP 8.4+ required – you are running ".PHP_VERSION."\n");
+}
+
+/*────────────── Environment ───────────────*/
 session_start(SESSION_OPTS);
 
 /* helper: HTML escape */
-function h(string $s): string { return htmlspecialchars($s, ENT_QUOTES|ENT_SUBSTITUTE, 'UTF‑8'); }
+function h(string $s): string { return htmlspecialchars($s, ENT_QUOTES|ENT_SUBSTITUTE, 'UTF-8'); }
 /* helper: m/d/y */
 function d8(int $t): string   { return date('m/d/y', $t); }
 
@@ -116,7 +146,7 @@ function makeThumb(string $src, string $dst): void
     };
     if (!$create) return;
 
-    // Murphy guard: refuse huge pixel counts (>40 MP)
+    // refuse huge (>40 MP) images
     if ($w * $h > 40_000_000) return;
 
     $srcImg = $create($src);
@@ -145,7 +175,7 @@ function handleUpload(array $file): array
         exit('file too large');
     }
 
-    /* first quick sniff – only first 256 B */
+    /* first quick sniff – 256 B */
     $data   = file_get_contents($file['tmp_name'], false, null, 0, 256);
     $finfo  = new finfo(FILEINFO_MIME_TYPE);
     $mime   = $finfo->buffer($data);
@@ -161,7 +191,7 @@ function handleUpload(array $file): array
         exit('unsupported type');
     }
 
-    /* unique 12‑hex id (retry on collision) */
+    /* unique 12‑hex id */
     do {
         $id = bin2hex(random_bytes(6));
         $image = "uploads/$id.$ext";
@@ -172,7 +202,7 @@ function handleUpload(array $file): array
     move_uploaded_file($file['tmp_name'], __DIR__.'/'.$image);
     chmod(__DIR__.'/'.$image, 0644);
 
-    /* second full‑file sniff – prevents clever  polyglots */
+    /* second full‑file sniff */
     $mime2 = $finfo->file(__DIR__.'/'.$image);
     if (!isset($extMap[$mime2])) {
         @unlink(__DIR__.'/'.$image);
@@ -286,7 +316,16 @@ if ($tid) {                               /* Thread view with pagination */
 
 /*────────────── HTML OUTPUT ───────────────────────────────*/
 header('Content-Type: text/html; charset=utf-8');
-header("Content-Security-Policy: default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'none'; form-action 'self'; frame-ancestors 'none'");
+header(
+    "Content-Security-Policy: ".
+    "default-src 'self'; ".
+    "script-src 'self' 'unsafe-inline'; ".
+    "style-src  'self' 'unsafe-inline'; ".
+    "img-src    'self' data:; ".
+    "form-action 'self'; ".
+    "frame-ancestors 'none'; ".
+    "object-src 'none'"
+);
 header('X-Content-Type-Options: nosniff');
 header('X-Frame-Options: DENY');
 ?>
@@ -305,9 +344,9 @@ header('X-Frame-Options: DENY');
 
 <script>
 const active_page = <?= $tid?'"thread"':'"index"' ?>,
-      board_name='b',
-      thread_id=<?= $tid ?: 'null' ?>,
-      csrf='<?= csrfToken() ?>';
+      board_name   = 'b',
+      thread_id    = <?= $tid ?: 'null' ?>,
+      csrf         = '<?= csrfToken() ?>';
 function swapStyle(n){
   document.querySelectorAll('link[data-style]').forEach(l=>{
     if(l.dataset.style==='default') return;
