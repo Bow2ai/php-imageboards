@@ -2,4 +2,4 @@
 
 Adelia- What if you took vichan, made it one 435 line page of php code, sqlite3, security, and made it to only work with php8.4.8++ ? Well run this board and find out! It's awesome, and makes you wonder why vichan insists on extreme bloat and the largest attack surface possible. Requires an uploads and uploads/thumb dir.  You can drop in any  existing vichan js or css ! Have ai audit the small index.php and change anything you want! Bam! Escape from the vortex of unsafe code and malicious culture that is vichan. 
 
-Adelia1- While Adelia is quite secure, Adelia1 has improved security. 
+Adelia1- While Adelia is quite secure, Adelia1 has slightly improved security hardening. Hey, its php- there is ALWAYS room to make it more secure. In either the server settings, or the php code itself, there is ALWAYS room to make php apps more secure. THAT is why php is rapidly going out of style. Want real security? Use a RUST coded imageboard. 
