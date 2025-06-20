@@ -273,7 +273,7 @@ and gate posting accordingly.
 
 ## 14 · License & Credits <a id="14-license--credits"></a>
 
-TinyBoard is released under the **MIT License**.
+Adelia is released under the **MIT License**.
 Theme CSS adapted from **vichan** (Apache‑2.0).
 Thumbnail logic inspired by **Danbooru** (MIT).
 
