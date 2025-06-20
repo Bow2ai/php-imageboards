@@ -1,4 +1,4 @@
-# PSA- PHP is a mind virus, a vortex of stupidity. IF you are going to use php, do NOT use it for anything serious, and keep the code SMALL as possible and ONLY use the very latest version of php.
+# PSA- PHP is a mind virus, a vortex of failure. IF you are going to use php, do NOT use it for anything serious, and keep the code SMALL as possible and ONLY use the very latest version of php.
 
 
 # board list
