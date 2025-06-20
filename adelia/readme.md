@@ -263,7 +263,7 @@ or hide the file field via CSS.
 <details>
 <summary><strong>Where is user login?</strong></summary>
 
-TinyBoard is designed for anonymous / pseudonymous posting.
+Adelia is designed for anonymous / pseudonymous posting.
 If you need accounts, add a `users` table, reuse CSRF/session code,
 and gate posting accordingly.
 
