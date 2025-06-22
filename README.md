@@ -2,7 +2,7 @@
  
 **Adelia Imageboard**
 
-Most php imageboard apps are a bloated pile of crap. Now that Ai is here, i can make the imageboard that i always dreamed of. One without the nonsense. THIS repo is made for people who want to have wholsesome educational sites using the basic imageboard model. As such, it is a cross of Forums, Imageboards and Wikipedia. 
+Most php imageboard apps are a bloated pile of crap. Now that Ai is here, i can make the imageboard that i always dreamed of. One without the nonsense. THIS repo is made for people who want to have wholsesome educational sites using the basic imageboard model. As such, it is a cross of Forums, Imageboards and Wiki. 
 
 Each folder represents a stable dev milestone. Versioning that way will keep the code separated to allow quick rollbacks and comparisons. For early dev sqlite3 is used, our more developed version will use postgres as it is more secure. 
 
