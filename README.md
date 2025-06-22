@@ -99,4 +99,4 @@ Security insights and reports are welcome. Please open an issue for any vulnerab
 
 ---
 
-**Adelia** — Escape the bloat, embrace security, and run the only imageboard built for the latest PHP. If nothing else, repos like this might force vichan to pretend that they actually care about security. 
+**Adelia** — Escape the bloat, embrace security, and run the only imageboard built for the latest PHP. If nothing else, repos like this might force vichan to pretend that they actually care about security. The inept, dangerous legacy ways of vichan serve as a great example of how NOT to maintain a repo. It is a profound example, in fact. Anyone who wants a wholesome, edicational website and attempts to use vichan will be in for a shock once you are exposed to the vichan culture. This repo solves that problem. Ai solves all problems! :) 
