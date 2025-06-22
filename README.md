@@ -6,15 +6,6 @@ A lightweight, security-focused PHP discussion/imageboard built for the latest P
 
 ---
 
-## Directory Structure
-
-```plaintext
-/                  # Root of repository
-├─ /adelia         # Version 1: basic single-file board (v1.x)
-├─ /adelia1        # Version 2: enhanced security hardening (v2.x)
-└─ /adelia2        # Version 3: production defaults and output normalization (v3.x)
-```
-
 Each folder represents a stable dev milestone. Keep the code separated to allow quick rollbacks and comparisons.
 
 ---
