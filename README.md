@@ -1,72 +1,115 @@
 
  
- 
- 
- # Zero tolerance for lesser PHP versions !! 
- FIRST things first. THis ib is ONLY made to run in PHP 8.4.8 and above. THIS IB DOES NOT CARE ABOUT  old, unsafe , depricated lower versions of php that do not even have security support any more. In fact, when any new version of php comes out, this app will update as rapidly as possible. We have ZERO TOLERANCE for any version of php lower than the very latest version. 
- 
+**Adelia Imageboard**
 
- # ZERO TOLERANCE FOR BLOAT !!
-Every other php imageboard has lots of bloat. That is absurd and makes the app easy to hack. The codebase of this ib will be 1/1000th of bloated boards. Yes, it is true, and yes, it will stay that way.  
+A lightweight, security-focused PHP discussion/imageboard built for the latest PHP versions. Ideal for embedding in your existing sites and tracking development across versions.
 
-# Roadmap
+---
 
-1- Get a decent board up, no bloat and security focused. Done with our first version, 435 lines of code! 
+## Directory Structure
 
-2- Next, we will dev the app giving it minimal sensible features and make it as rock solid as possible. 
+```plaintext
+/                  # Root of repository
+├─ /adelia         # Version 1: basic single-file board (v1.x)
+├─ /adelia1        # Version 2: enhanced security hardening (v2.x)
+└─ /adelia2        # Version 3: production defaults and output normalization (v3.x)
+```
 
-3- Lastly, we will focus entirely on security- adding any new feature would introduce possible attack surface so the last step will be to only work on security and to make sure the board is made for the very latest version of php. No other imageboard app comes close to our standards. This is the only ib that ONLY works with the very latest version of php. 
+Each folder represents a stable dev milestone. Keep the code separated to allow quick rollbacks and comparisons.
 
- 
- PSA- PHP is a mind virus, a vortex of failure. IF you are going to use php, do NOT use it for anything serious, and keep the code SMALL as possible and ONLY use the very latest version of php. One can NOT make a rock solid secure php app- several famous hackers have been saying that for years. Your server would have to be rock solid too. Nevertheless, this repo will strive to dev the most secure app possible. 
+---
 
-# Security insights are gladly accepted- create a github issue. There will ALWAYS be security issues in php, we know that. UNLIKE other imageboards, this one will not be bloated and it will have a very heavy and unwavering focus on security. NO OTHER php imageboard can even come close to saying that. 
+## Requirements
 
+* **PHP 8.4.8 or newer**
+* SQLite3 extension enabled
+* Write permissions for the `uploads/` and `uploads/thumb/` directories
 
+This application is designed exclusively for modern PHP releases. Older versions are unsupported and may expose security risks.
 
+---
 
- # Adelia- 
+## Key Principles
 
-What if you took vichan, made it one 435 line page of php code, sqlite3, security, and made it to only work with php8.4.8++ ? Well run this board and find out! It's awesome, and makes you wonder why vichan insists on extreme bloat and the largest attack surface possible. Requires an uploads and uploads/thumb dir.  You can drop in any  existing vichan js or css ! Have ai audit the small index.php and change anything you want! Bam! Escape from the vortex of unsafe code and malicious culture that is vichan. NOTE- use Adelia1 it is better. This version (adelia) is good if you want to feed it to Ai and veer off in another direction. As such it is a starter kit to get you going fast with dev. 
+1. **Zero Tolerance for Legacy PHP**
+   We only support the latest PHP with full security support—no compatibility layers or deprecated code.
 
+2. **Minimal Bloat**
+   At around 500 lines of code per version, our codebase is a fraction of typical imageboards, reducing attack surface and simplifying audits.
 
-# Adelia1- 
+3. **Security-First**
+   Every feature is chosen for necessity and implemented with defense-in-depth in mind.
 
- • Field length caps and server‑side truncation
- 
-  • Double MIME sniff for uploads
-  
-  • Moderator redirect sanitised
-  
-  • CSP + nosniff + XFO headers
+---
 
+## Roadmap
 
-Awesome app... 505 lines of code! While Adelia is quite secure, Adelia1 has slightly improved security hardening. Hey, its php- there is ALWAYS room to make it more secure. In either the server settings or the php code itself, there is ALWAYS room to make php apps more secure. THAT is why php is rapidly going out of style. Want real security? Use a RUST coded imageboard. IF you want to use php, use a VERY small codebase like adelia or adelia1 , have ai audit the code every so often, and never use php for anything serious.  
+1. **v1.x (Adelia)** — Basic board functionality, no extra features, maximum security focus. (\~435 lines)
+2. **v2.x (Adelia1)** — Incremental, minimal features with rock-solid stability and performance. (\~505 lines)
+3. **v3.x (Adelia2)** — Security hardening only, production-ready defaults, and whitespace normalization. (\~472 lines)
+4. **Future Milestones** — Security hardening only. No new user-facing features to avoid expanding attack surface. Continuous updates for each new PHP release.
 
-# adelia2-
+---
 
-472 lines. May or may not be better than adelia1, depending on how server is set up. Personally, i like adelia1 better. White‑space handling	Any run of two or more newlines is collapsed to one newline, so a pasted wall of blank lines now renders with the minimum possible vertical gap (one br>). Security / prod hardening	• expose_php disabled
-• session cookie made Secure automatically when the site is served over HTTPS, kept Strict/HttpOnly otherwise
-• extra defence‑in‑depth headers (Referrer‑Policy, Permissions‑Policy, X‑Permitted‑Cross‑Domain‑Policies)
+## Version Overview
 
-Whitespace tightening – normalizeWhitespace() now uses '/\n{2,}/' instead of '/\n{3,}/', so there is never a blank line, only a single br>.
+### Adelia (v1.x)
 
-Headers & php.ini flags – added ini_set('expose_php','0') and three security headers; session cookie is marked Secure automatically when HTTPS is detected.
+* Single-file PHP board (`/adelia`) using `declare(strict_types=1)` and minimal dependencies
+* Requires PHP 8.4+ with built-in version check and 500 response on older versions
+* SQLite3 backend with WAL journaling and a simple `posts` table schema
+* Session management with `HttpOnly` and `SameSite=Strict` cookies
+* CSRF protection with per-session tokens and token verification on POST actions
+* IP-based rate limiting (10 sec cooldown between posts)
+* Secure file uploads: double MIME sniffing, 5 MiB size limit, unique IDs, metadata stripping
+* Automatic 255×144 PNG thumbnail generation with oversized-image guard (≤40 MP)
+* Moderator deletion endpoint protected by bcrypt-hashed password
+* Thread and index pagination (15 threads/posts per page)
+* Clean HTML output with theme-switcher hooks
+* \~435 lines of self-contained, well-documented PHP code
 
-No functional logic altered – DB schema, routing, uploads, CSRF, rendering all behave exactly as before, just with tidier output and stronger defaults for production deployment.
+### Adelia1 (v2.x)
 
+* Configurable debugging & logging (`DEBUG_DISPLAY`, `DEBUG_LOG`) with optional error.txt logging
+* Fully functional without `mbstring`, with ASCII-only `mb_substr`/`mb_strlen` fallbacks
+* Field length caps and server-side truncation for `name` (35), `subject` (100), and `body` (10,000)
+* Second full-file MIME sniff after upload to ensure type consistency
+* Sanitized moderator redirect logic preventing external or newline-injected URLs
+* Enhanced CSRF and session handling (HTTP‑only, `SameSite=Strict` cookies)
+* Hardened HTTP headers: Content-Security-Policy, `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`
+* Same thumbnail, WAL-backed SQLite, rate‑limit, and pagination logic as v1, with logging support
+* \~505 lines of self-contained PHP for rock-solid security and auditability
 
+### Adelia2 (v3.x)
 
+* Production-grade defaults: `expose_php` disabled and error logging off by default
+* Session cookies marked `Secure` when HTTPS is detected, along with `HttpOnly` and `SameSite=Strict`
+* Whitespace normalization (`normalizeWhitespace`): CRLF→LF, collapse ≥2 newlines to one, and shrink multi-space runs
+* Tightened output trimming to prevent blank lines and excessive spacing before rendering
+* Configurable mbstring fallbacks remain in place for environments without `mbstring`
+* Dual MIME sniff on uploads, 5 MiB limit, unique IDs, and metadata stripping unchanged
+* Hardened headers: Content-Security-Policy, `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`,
+  `Referrer-Policy: same-origin`, `Permissions-Policy`, and `X-Permitted-Cross-Domain-Policies`
+* SQLite3 WAL mode, IP rate limiting, CSRF tokens, pagination, and moderator delete flow as before
+* \~472 lines of polished, production-ready PHP code
 
+---
 
+## Usage
 
+1. Clone the repository.
+2. Choose a version folder (`adelia`, `adelia1`, or `adelia2`).
+3. Ensure your server meets the requirements above.
+4. Configure your web server to serve `index.php` in that folder.
+5. Create `uploads/` and `uploads/thumb/` directories with write permissions.
+6. Start posting!
 
+---
 
+## Contributing & Security
 
+Security insights and reports are welcome. Please open an issue for any vulnerabilities or suggestions. We maintain minimal code and rapid updates to stay ahead of PHP security challenges.
 
+---
 
-
-
-
-
- 
+**Adelia** — Escape the bloat, embrace security, and run the only imageboard built for the latest PHP.
