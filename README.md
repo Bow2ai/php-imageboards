@@ -3,7 +3,7 @@
  
  
  # Zero tolerance for lesser PHP versions !! 
- FIRST things first. THis ib is ONLY made PHP 8.4.8 and above. THIS IB DOES NOT CARE ABOUT  old, unsafe , depricated lower versions of php that do not even have security support any more. In fact, when any new version of php comes out, this app will update as rapidly as possible. We have ZERO TOLERANCE for any version of php lower than the very latest version. 
+ FIRST things first. THis ib is ONLY made to run in PHP 8.4.8 and above. THIS IB DOES NOT CARE ABOUT  old, unsafe , depricated lower versions of php that do not even have security support any more. In fact, when any new version of php comes out, this app will update as rapidly as possible. We have ZERO TOLERANCE for any version of php lower than the very latest version. 
  
 
  # ZERO TOLERANCE FOR BLOAT !!
