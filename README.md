@@ -89,7 +89,7 @@ This application is designed exclusively for modern PHP releases. Older versions
 3. Ensure your server meets the requirements above.
 4. Configure your web server to serve `index.php` in that folder.
 5. Create `uploads/` and `uploads/thumb/` directories with write permissions.
-6. Start posting!
+6. Start posting! The first time you run index.php it makes the sqlite3 db for you! Bam! 
 
 ---
 
