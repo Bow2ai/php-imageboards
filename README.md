@@ -1,3 +1,12 @@
+
+ 
+ 
+ 
+ # Zero tolerance for lesser PHP versions !! 
+ FIRST things first. THis ib is ONLY made for php verisons of PHP 8.4.8 and above. THIS IB DOES NOT CARE ABOUT  old, unsafe , depricated lower versions of php that do not even have security support any more. In fact, when any new version of php comes out, this app will update as rapidly as possible. We have ZERO TOLERANCE for any version of php lower than the very latest version. 
+ 
+ 
+ 
  PSA- PHP is a mind virus, a vortex of failure. IF you are going to use php, do NOT use it for anything serious, and keep the code SMALL as possible and ONLY use the very latest version of php. One can NOT make a rock solid secure php app- several famous hackers have been saying that for years. Your server would have to be rock solid too. Nevertheless, this repo will strive to dev the most secure app possible. 
 
 # Security insignts are gladly accepted- create a github issue. There will ALWAYS be security issues in php, we know that. UNLIKE other imageboards, this one will not be bloated and it will have a very heavy and unwavering focus on security. NO OTHER php imageboard can even come close to saying that. 
