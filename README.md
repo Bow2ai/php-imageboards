@@ -5,9 +5,7 @@
 Most php imageboard apps are a bloated pile of crap. Finally, a repo to solve that problematic reality! 
 ---
 
-Each folder represents a stable dev milestone. Keep the code separated to allow quick rollbacks and comparisons.
-
----
+Each folder represents a stable dev milestone. Keep the code separated to allow quick rollbacks and comparisons. For early dev sqlite3 is used, our last version will use postgres as it is more secure. 
 
 ## Requirements
 
