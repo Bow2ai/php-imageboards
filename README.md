@@ -25,7 +25,7 @@ Each folder represents a stable dev milestone. Keep the code separated to allow 
 * SQLite3 extension enabled
 * Write permissions for the `uploads/` and `uploads/thumb/` directories
 
-This application is designed exclusively for modern PHP releases. Older versions are unsupported and may expose security risks.
+This application is designed exclusively for modern PHP releases. Older versions of php are unsupported and may expose security risks.
 
 ---
 
