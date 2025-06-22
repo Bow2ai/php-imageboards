@@ -2,7 +2,7 @@
  
 **Adelia Imageboard**
 
-A lightweight, security-focused PHP discussion/imageboard built for the latest PHP versions. Ideal for embedding in your existing sites and tracking development across versions.
+Most php imageboard apps are a bloated pile of crap. Finally, a repo to solve that problematic issue that has existed for years. 
 
 ---
 
