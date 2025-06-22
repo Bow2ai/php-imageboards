@@ -1,4 +1,6 @@
-# PSA- PHP is a mind virus, a vortex of failure. IF you are going to use php, do NOT use it for anything serious, and keep the code SMALL as possible and ONLY use the very latest version of php.
+# PSA- PHP is a mind virus, a vortex of failure. IF you are going to use php, do NOT use it for anything serious, and keep the code SMALL as possible and ONLY use the very latest version of php. One can NOT make a rock solid secure php app- several famous hackers have been saying that for years. Your server would have to be rock solid too. Nevertheless, this repo will strive to dev the most secure app possible. 
+
+Security insignts are gladly accepted- create a github issue. There will ALWAYS be security issues in php, we know that. UNLIKE other imageboards, this one will not be bloated and it will have a very heavy and unwavering focus on security. NO OTHER php imageboard can even come close to saying that. 
 
 
 
