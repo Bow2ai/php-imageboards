@@ -96,7 +96,7 @@ This application is designed exclusively for modern PHP releases. Older versions
 
 ## Contributing & Security
 
-Security insights and reports are welcome. Please open an issue for any vulnerabilities or suggestions. We maintain minimal code and rapid updates to stay ahead of PHP security challenges. Nowadays, github issue posting is a bit silly when you can just feed the code to ai and have your desired feature instantly coded for you. NEVERTHELESS, if you think of any minimal features that would benefit everyone, feel free to post a github issue. I will go one step further, in fact. IF you want an issue that i do not want to implememet, and IF you do not have access to Ai, i can have ai code your desired feature into the app and i will give you the full code. LOOK at vichan issues-- about 5 years of people wanting features or compatibility with latest php versions and getting zero results. THIS repo is not like that, and THIS repo will maintain things the right way. 
+Security insights and reports are welcome. Please open an issue for any vulnerabilities or suggestions. We maintain minimal code and rapid updates to stay ahead of PHP security challenges. Nowadays, github issue posting is a bit silly when you can just feed the code to ai and have your desired feature instantly coded for you. NEVERTHELESS, if you think of any minimal features that would benefit everyone, feel free to post a github issue. 
 
 ---
 
