@@ -50,4 +50,3 @@ No functional logic altered – DB schema, routing, uploads, CSRF, rendering all
 
 
  
-# Note- since php is not that great, i am not going to make any more imageboards besides the "adelia" series. I will work on them every so often. Mostly, i will be working with Rust -, because php is just silly. 
