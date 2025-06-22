@@ -1,5 +1,6 @@
 
- 
+
+
 **Adelia Imageboard**
 
 Most php imageboard apps are a bloated pile of crap. Now that Ai is here, i can make the imageboard that i always dreamed of. One without the nonsense. THIS repo is made for people who want to have wholsesome educational sites using the basic imageboard model. As such, it is a cross of Forums, Imageboards and Wiki. 
