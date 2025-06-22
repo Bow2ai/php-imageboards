@@ -2,8 +2,7 @@
  
 **Adelia Imageboard**
 
-Most php imageboard apps are a bloated pile of crap. Finally, a repo to solve that problematic reality! 
----
+Most php imageboard apps are a bloated pile of crap. Now that Ai is here, i can make the imageboard that i always dreamed of. One without the nonsense. 
 
 Each folder represents a stable dev milestone. Versioning that way will keep the code separated to allow quick rollbacks and comparisons. For early dev sqlite3 is used, our more developed version will use postgres as it is more secure. 
 
