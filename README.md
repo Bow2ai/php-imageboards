@@ -1,4 +1,10 @@
+.
+.
+.
 
+
+
+NOTICE - In general, php is about the LAST lang on earth that should be used for anything serious. Rust apps are far superior. 
 
 
 **Adelia Imageboard**
