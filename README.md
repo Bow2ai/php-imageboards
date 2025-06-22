@@ -2,8 +2,7 @@
  
 **Adelia Imageboard**
 
-Most php imageboard apps are a bloated pile of crap. Finally, a repo to solve that problematic issue that has existed for years. 
-
+Most php imageboard apps are a bloated pile of crap. Finally, a repo to solve that problematic reality! 
 ---
 
 Each folder represents a stable dev milestone. Keep the code separated to allow quick rollbacks and comparisons.
