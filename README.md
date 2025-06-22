@@ -11,7 +11,11 @@ Every other php imageboard has lots of bloat. That is absurd and makes the app e
 
 # Roadmap
 
-1- Get a decent board up, no bloat and security focused. Done with our first version, 435 lines of code! Next, we will dev the app giving it minimal sensible features and make it as rock solid as possible. Lastly, we will focus entirely on security- adding any new feature would introduce possible attack surface so the last step will be to only work on security and to make sure the board is made for the very latest version of php. No other imageboard app comes close to our standards. This is the only ib that ONLY works with the very latest version of php. 
+1- Get a decent board up, no bloat and security focused. Done with our first version, 435 lines of code! 
+
+2- Next, we will dev the app giving it minimal sensible features and make it as rock solid as possible. 
+
+3- Lastly, we will focus entirely on security- adding any new feature would introduce possible attack surface so the last step will be to only work on security and to make sure the board is made for the very latest version of php. No other imageboard app comes close to our standards. This is the only ib that ONLY works with the very latest version of php. 
 
  
  PSA- PHP is a mind virus, a vortex of failure. IF you are going to use php, do NOT use it for anything serious, and keep the code SMALL as possible and ONLY use the very latest version of php. One can NOT make a rock solid secure php app- several famous hackers have been saying that for years. Your server would have to be rock solid too. Nevertheless, this repo will strive to dev the most secure app possible. 
