@@ -3,7 +3,7 @@
 
 **Adelia Imageboard**
 
-Most php imageboard apps are a bloated pile of crap. Now that Ai is here, i can make the imageboard that i always dreamed of. One without the nonsense. THIS repo is made for people who want to have wholsesome educational sites using the basic imageboard model. As such, it is a cross of Forums, Imageboards and Wiki. 
+Most php imageboard apps are a bloated pile of crap. Now that Ai is here, i can make the imageboard that i always dreamed of. One without the nonsense. THIS repo is made for people who want to have wholesome educational sites using the basic imageboard model. As such, it is a cross of Forums, Imageboards and Wiki. 
 
 Each folder represents a stable dev milestone. Versioning that way will keep the code separated to allow quick rollbacks and comparisons. For early dev sqlite3 is used, our more developed version will use postgres as it is more secure. 
 
@@ -96,8 +96,8 @@ This application is designed exclusively for modern PHP releases. Older versions
 
 ## Contributing & Security
 
-Security insights and reports are welcome. Please open an issue for any vulnerabilities or suggestions. We maintain minimal code and rapid updates to stay ahead of PHP security challenges. Nowadays, github issue posting is a bit silly when you can just feed the code to ai and have your desired feature instantly coded for you. NEVERTHELESS, if you think of any minimal features that would benefit everyone, feel free to post a github issue. I will go one step further, in fact. IF you want an issue that i do not want to implememet, and IF you do not have access to Ai, i can have ai code your desisred feature into the app and i will give you the full code. LOOK at vichan issues-- about 5 years of people wanting features or compatibility with latest php versions and getting zero results. THIS repo is not like that, and THIS repo will maintain things the right way. 
+Security insights and reports are welcome. Please open an issue for any vulnerabilities or suggestions. We maintain minimal code and rapid updates to stay ahead of PHP security challenges. Nowadays, github issue posting is a bit silly when you can just feed the code to ai and have your desired feature instantly coded for you. NEVERTHELESS, if you think of any minimal features that would benefit everyone, feel free to post a github issue. I will go one step further, in fact. IF you want an issue that i do not want to implememet, and IF you do not have access to Ai, i can have ai code your desired feature into the app and i will give you the full code. LOOK at vichan issues-- about 5 years of people wanting features or compatibility with latest php versions and getting zero results. THIS repo is not like that, and THIS repo will maintain things the right way. 
 
 ---
 
-**Adelia** — Escape the bloat, embrace security, and run the only imageboard built for the latest PHP version. If nothing else, repos like this might force vichan to pretend that they actually care about security. The inept, dangerous legacy ways of vichan serve as a great example of how NOT to maintain a repo. It is a profound example, in fact. Anyone who wants a wholesome, edicational website and attempts to use vichan will be in for a shock once you are exposed to the vichan culture. This repo solves that problem. Ai solves all problems! :) 
+**Adelia** — Escape the bloat, embrace security, and run the only imageboard built for the latest PHP version. If nothing else, repos like this might force vichan to pretend that they actually care about security. The inept, dangerous legacy ways of vichan serve as a great example of how NOT to maintain a repo. It is a profound example, in fact. Anyone who wants a wholesome, educational website and attempts to use vichan will be in for a shock once you are exposed to the vichan culture. This repo solves that problem. Ai solves all problems! :) 
